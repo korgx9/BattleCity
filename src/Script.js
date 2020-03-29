@@ -12,7 +12,7 @@ Script.prototype.update = function () {
     return;
   }
   while (true) {
-    if (this._nodes.length == 0) {
+    if (this._nodes.length === 0) {
       return;
     }
     if (this._nodes[0].update !== undefined) {

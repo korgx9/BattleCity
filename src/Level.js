@@ -18,6 +18,10 @@ function Level(sceneManager, stageNumber, player) {
   this._playerTankFactory.setAppearPosition(new Point(this._x + 4 * Globals.UNIT_SIZE, this._y + 12 * Globals.UNIT_SIZE));
   this._playerTankFactory.create();
 
+  this._playerTwoTankFactory = new PlayerTankFactory(this._eventManager);
+  this._playerTwoTankFactory.setAppearPosition(new Point(this._x + 4 * Globals.UNIT_SIZE, this._y + 12 * Globals.UNIT_SIZE));
+  this._playerTwoTankFactory.create();
+
   new BulletFactory(this._eventManager);
   new BulletExplosionFactory(this._eventManager);
   new TankExplosionFactory(this._eventManager);

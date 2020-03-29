@@ -38,8 +38,5 @@ PlayerTankFactory.prototype._tankExplosionDestroyed = function (event) {
     return false;
   }
   var tank = event.explosion.getTank();
-  if (!tank.isPlayer()) {
-    return false;
-  }
-  return true;
+  return tank.isPlayer();
 };
