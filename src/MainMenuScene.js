@@ -9,6 +9,7 @@ function MainMenuScene(sceneManager) {
   this._mainMenu = new MainMenu();
   this._mainMenu.setItems([
     new OnePlayerMenuItem(this._sceneManager),
+    new TwoPlayersMenuItem(this._sceneManager),
     new ConstructionMenuItem(this._sceneManager)
   ]);
   
@@ -33,7 +34,7 @@ MainMenuScene.prototype.setSpeed = function (speed) {
 };
 
 MainMenuScene.prototype.updatePosition = function () {
-  if (this._y == 0) {
+  if (this._y === 0) {
     this._mainMenuController.activate();
     return;
   }
@@ -74,13 +75,13 @@ MainMenuScene.prototype.draw = function (ctx) {
 };
 
 MainMenuScene.prototype.notify = function (event) {
-  if (event.name == Keyboard.Event.KEY_PRESSED) {
+  if (event.name === Keyboard.Event.KEY_PRESSED) {
     this.keyPressed(event.key);
   }
 };
 
 MainMenuScene.prototype.keyPressed = function (key) {
-  if (key == Keyboard.Key.START || key == Keyboard.Key.SELECT) {
+  if (key === Keyboard.Key.START || key === Keyboard.Key.SELECT) {
     this.arrived();
   }
 };
