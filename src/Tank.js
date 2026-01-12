@@ -44,7 +44,7 @@ Tank.subclass(Sprite);
 
 Tank.Type = {};
 Tank.Type.PLAYER_1 = 'player1';
-Tank.Type.PLAYER_2 = 'player1';
+Tank.Type.PLAYER_2 = 'player2';
 Tank.Type.BASIC = 'basic';
 Tank.Type.FAST = 'fast';
 Tank.Type.POWER = 'power';

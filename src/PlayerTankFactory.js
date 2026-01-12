@@ -1,8 +1,9 @@
-function PlayerTankFactory(eventManager) {
+function PlayerTankFactory(eventManager, isSecondPlayer) {
   this._eventManager = eventManager;
   this._eventManager.addSubscriber(this, [TankExplosion.Event.DESTROYED]);
   this._appearPosition = new Point(0, 0);
   this._active = true;
+  this._isSecondPlayer = isSecondPlayer === undefined ? false : isSecondPlayer;
 }
 
 PlayerTankFactory.Event = {};
@@ -25,6 +26,9 @@ PlayerTankFactory.prototype.create = function () {
   var tank = new Tank(this._eventManager);
   tank.setPosition(this._appearPosition);
   tank.setState(new TankStateAppearing(tank));
+  if (this._isSecondPlayer) {
+    tank.setType(Tank.Type.PLAYER_2);
+  }
   this._eventManager.fireEvent({'name': PlayerTankFactory.Event.PLAYER_TANK_CREATED, 'tank': tank});
   return tank;
 };

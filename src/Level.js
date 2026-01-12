@@ -1,4 +1,4 @@
-function Level(sceneManager, stageNumber, player) {
+function Level(sceneManager, stageNumber, player, twoPlayerMode) {
   Gamefield.call(this, sceneManager);
   
   var self = this;
@@ -11,6 +11,7 @@ function Level(sceneManager, stageNumber, player) {
   
   this._visible = false;
   this._stage = stageNumber;
+  this._twoPlayerMode = twoPlayerMode === undefined ? false : twoPlayerMode;
   
   new PlayerTankControllerFactory(this._eventManager);
   
@@ -18,9 +19,13 @@ function Level(sceneManager, stageNumber, player) {
   this._playerTankFactory.setAppearPosition(new Point(this._x + 4 * Globals.UNIT_SIZE, this._y + 12 * Globals.UNIT_SIZE));
   this._playerTankFactory.create();
 
-  this._playerTwoTankFactory = new PlayerTankFactory(this._eventManager);
-  this._playerTwoTankFactory.setAppearPosition(new Point(this._x + 4 * Globals.UNIT_SIZE, this._y + 12 * Globals.UNIT_SIZE));
-  this._playerTwoTankFactory.create();
+  this._playerTwoTankFactory = new PlayerTankFactory(this._eventManager, true);
+  this._playerTwoTankFactory.setAppearPosition(new Point(this._x + 12 * Globals.UNIT_SIZE, this._y + 12 * Globals.UNIT_SIZE));
+  
+  if (this._twoPlayerMode) {
+    this._playerTwoTankFactory.create();
+    new PlayerTwoTankControllerFactory(this._eventManager);
+  }
 
   new BulletFactory(this._eventManager);
   new BulletExplosionFactory(this._eventManager);

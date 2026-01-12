@@ -6,5 +6,5 @@ function TwoPlayersMenuItem(sceneManager) {
 TwoPlayersMenuItem.subclass(MainMenuItem);
 
 TwoPlayersMenuItem.prototype.execute = function () {
-  this._sceneManager.toGameScene();
+  this._sceneManager.toGameScene(1, undefined, true);
 };
