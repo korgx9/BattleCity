@@ -15,6 +15,11 @@ function Level(sceneManager, stageNumber, player, twoPlayerMode) {
   
   new PlayerTankControllerFactory(this._eventManager);
   
+  // Create PlayerTwoTankControllerFactory BEFORE creating the tank so it catches the event
+  if (this._twoPlayerMode) {
+    new PlayerTwoTankControllerFactory(this._eventManager);
+  }
+  
   this._playerTankFactory = new PlayerTankFactory(this._eventManager);
   this._playerTankFactory.setAppearPosition(new Point(this._x + 4 * Globals.UNIT_SIZE, this._y + 12 * Globals.UNIT_SIZE));
   this._playerTankFactory.create();
@@ -25,7 +30,6 @@ function Level(sceneManager, stageNumber, player, twoPlayerMode) {
   
   if (this._twoPlayerMode) {
     this._playerTwoTankFactory.create();
-    new PlayerTwoTankControllerFactory(this._eventManager);
   }
 
   new BulletFactory(this._eventManager);
