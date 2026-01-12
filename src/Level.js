@@ -19,8 +19,9 @@ function Level(sceneManager, stageNumber, player, twoPlayerMode) {
   this._playerTankFactory.setAppearPosition(new Point(this._x + 4 * Globals.UNIT_SIZE, this._y + 12 * Globals.UNIT_SIZE));
   this._playerTankFactory.create();
 
-  this._playerTwoTankFactory = new PlayerTankFactory(this._eventManager, true);
-  this._playerTwoTankFactory.setAppearPosition(new Point(this._x + 12 * Globals.UNIT_SIZE, this._y + 12 * Globals.UNIT_SIZE));
+  this._playerTwoTankFactory = new PlayerTankFactory(this._eventManager);
+  this._playerTwoTankFactory.setAppearPosition(new Point(this._x + 8 * Globals.UNIT_SIZE, this._y + 12 * Globals.UNIT_SIZE));
+  this._playerTwoTankFactory.setSecondPlayer(true);
   
   if (this._twoPlayerMode) {
     this._playerTwoTankFactory.create();

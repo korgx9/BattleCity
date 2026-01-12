@@ -22,6 +22,10 @@ PlayerTankFactory.prototype.setAppearPosition = function (position) {
   this._appearPosition = position;
 };
 
+PlayerTankFactory.prototype.setSecondPlayer = function (isSecondPlayer) {
+  this._isSecondPlayer = isSecondPlayer;
+};
+
 PlayerTankFactory.prototype.create = function () {
   var tank = new Tank(this._eventManager);
   tank.setPosition(this._appearPosition);
