@@ -46,5 +46,10 @@ PlayerTankFactory.prototype._tankExplosionDestroyed = function (event) {
     return false;
   }
   var tank = event.explosion.getTank();
-  return tank.isPlayer();
+  if (!tank.isPlayer()) {
+    return false;
+  }
+  // Only respawn the correct player type
+  var expectedType = this._isSecondPlayer ? Tank.Type.PLAYER_2 : Tank.Type.PLAYER_1;
+  return tank.getType() === expectedType;
 };
