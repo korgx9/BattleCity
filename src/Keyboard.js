@@ -5,22 +5,23 @@ function Keyboard(eventManager) {
   this._keys = {};
 }
 
-Keyboard.Key = {};
-Keyboard.Key.SPACE = 32;
-Keyboard.Key.LEFT = 37;
-Keyboard.Key.UP = 38;
-Keyboard.Key.RIGHT = 39;
-Keyboard.Key.DOWN = 40;
-Keyboard.Key.S = 83;
-Keyboard.Key.SELECT = 17;
-Keyboard.Key.START = 13;
+Keyboard.Key = {
+  SPACE:  32,
+  LEFT:   37,
+  UP:     38,
+  RIGHT:  39,
+  DOWN:   40,
+  S:      83,
+  SELECT: 17,
+  START:  13
+};
 
 Keyboard.Event = {};
 Keyboard.Event.KEY_PRESSED = 'Keyboard.Event.KEY_PRESSED';
 Keyboard.Event.KEY_RELEASED = 'Keyboard.Event.KEY_RELEASED';
 
 Keyboard.prototype._listen = function () {
-  var self = this;
+  let self = this;
   $(document).keydown(function (event) {
     if (!self._keys[event.which]) {
       self._keys[event.which] = true;
@@ -39,7 +40,8 @@ Keyboard.prototype._listen = function () {
 
 Keyboard.prototype.fireEvents = function () {
   this._events.forEach(function (event) {
-    this._eventManager.fireEvent(event);
-  }, this);
+    this._eventManager.fireEvent(event);},
+      this
+  );
   this._events = [];
 };

@@ -3,7 +3,7 @@ function EventManager() {
 }
 
 EventManager.prototype.addSubscriber = function (subscriber, events) {
-  for (var i in events) {
+  for (let i in events) {
     if (!this._subscribers[events[i]]) {
       this._subscribers[events[i]] = [];
     }
@@ -12,8 +12,8 @@ EventManager.prototype.addSubscriber = function (subscriber, events) {
 };
 
 EventManager.prototype.removeSubscriber = function (subscriber) {
-  for (var i in this._subscribers) {
-    for (var j in this._subscribers[i]) {
+  for (let i in this._subscribers) {
+    for (let j in this._subscribers[i]) {
       if (this._subscribers[i][j] === subscriber) {
         this._subscribers[i].splice(j, 1);
       }
@@ -26,8 +26,8 @@ EventManager.prototype.removeAllSubscribers = function () {
 };
 
 EventManager.prototype.fireEvent = function (event) {
-  var subscribers = this._subscribers[event.name];
-  for (var i in subscribers) {
+  let subscribers = this._subscribers[event.name];
+  for (let i in subscribers) {
     subscribers[i].notify(event);
   }
 };

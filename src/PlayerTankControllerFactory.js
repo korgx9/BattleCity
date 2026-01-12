@@ -5,7 +5,10 @@ function PlayerTankControllerFactory(eventManager) {
 
 PlayerTankControllerFactory.prototype.notify = function (event) {
   if (event.name == PlayerTankFactory.Event.PLAYER_TANK_CREATED) {
-    this.create(event.tank);
+    // Only create controller for player 1; player 2 uses PlayerTwoTankControllerFactory
+    if (event.tank && event.tank.getType() === Tank.Type.PLAYER_1) {
+      this.create(event.tank);
+    }
   }
 };
 

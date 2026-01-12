@@ -8,7 +8,8 @@ function TankStateNormal(tank) {
 }
 
 TankStateNormal.prototype.getImage = function () {
-  var image = 'tank_' + this._tank.getType() + '_'  + this._tank.getDirection() + '_c' + this._tank.getColorValue() + '_t' + this._trackAnimation.getFrame();
+  var typeKey = this._tank.getType();
+  var image = 'tank_' + typeKey + '_'  + this._tank.getDirection() + '_c' + this._tank.getColorValue() + '_t' + this._trackAnimation.getFrame();
   if (this._tank.isFlashing() && this._flashed && this._tank.isNotHit()) {
     image += '_f';
   }

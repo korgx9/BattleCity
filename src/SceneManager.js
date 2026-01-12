@@ -26,9 +26,9 @@ SceneManager.prototype.toMainMenuScene = function (arrived) {
   }
 };
 
-SceneManager.prototype.toGameScene = function (stage, player) {
+SceneManager.prototype.toGameScene = function (stage, player, twoPlayerMode) {
   this._eventManager.removeAllSubscribers();
-  this._scene = new GameScene(this, stage, player);
+  this._scene = new GameScene(this, stage, player, twoPlayerMode);
 };
 
 SceneManager.prototype.toConstructionScene = function () {
