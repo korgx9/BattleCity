@@ -74,8 +74,14 @@ function Level(sceneManager, stageNumber, player, twoPlayerMode) {
   
   this._pause = new Pause(this._eventManager);
   
-  this._player = player === undefined ? new Player() : player;
+  this._player = player === undefined ? new Player(Tank.Type.PLAYER_1) : player;
   this._player.setEventManager(this._eventManager);
+  
+  // In two-player mode, create a separate player 2 object for independent life tracking
+  if (this._twoPlayerMode) {
+    this._playerTwo = new Player(Tank.Type.PLAYER_2);
+    this._playerTwo.setEventManager(this._eventManager);
+  }
   
   this._livesView = new LivesView(this._player);
   
@@ -130,9 +136,21 @@ Level.prototype.notify = function (event) {
     this._pause.setActive(false);
   }
   else if (event.name == Player.Event.OUT_OF_LIVES) {
-    this._gameOverScript.setActive(true);
-    this._pause.setActive(false);
-    this._playerTankFactory.setActive(false);
+    // In two-player mode, only end game when both players are out of lives
+    if (this._twoPlayerMode) {
+      var player1OutOfLives = this._player.getLives() == 0;
+      var player2OutOfLives = this._playerTwo.getLives() == 0;
+      if (player1OutOfLives && player2OutOfLives) {
+        this._gameOverScript.setActive(true);
+        this._pause.setActive(false);
+        this._playerTankFactory.setActive(false);
+        this._playerTwoTankFactory.setActive(false);
+      }
+    } else {
+      this._gameOverScript.setActive(true);
+      this._pause.setActive(false);
+      this._playerTankFactory.setActive(false);
+    }
   }
   else if (event.name == EnemyFactory.Event.LAST_ENEMY_DESTROYED) {
     this._levelTransitionScript.setActive(true);

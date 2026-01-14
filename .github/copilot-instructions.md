@@ -55,13 +55,13 @@ The main update cycle: Scene → Script → Level → Updater → SpriteControll
 
 ## Common Tasks
 
-**Adding a New Sprite Type**: 
+**Adding a New Sprite Type**:
 1. Extend `Sprite` or `Tank`
 2. Define `Type` constants
 3. Create a Factory that subscribes to trigger events
 4. Add sprite/factory to script load order in [BattleCity.html](BattleCity.html)
 
-**Handling Collisions**: 
+**Handling Collisions**:
 1. Sprite subscribes to `CollisionDetector.Event.COLLISION`
 2. Override `notify()` to process collision data
 3. Adjust position or fire destruction event
@@ -75,3 +75,10 @@ The main update cycle: Scene → Script → Level → Updater → SpriteControll
 ## File Load Order Matters
 
 The HTML file ([BattleCity.html](BattleCity.html)) defines strict script inclusion order. Base classes must load before subclasses. Factories before their dependent components. When adding files, insert at the appropriate position to maintain dependency order.
+
+## Developer Workflows
+
+- **Running the Game**: Open [BattleCity.html](BattleCity.html) in a web browser.
+- **Running Tests**: Open [SpecRunner.html](SpecRunner.html) in a web browser to execute Jasmine test suite.
+- **No Build Process**: Pure client-side JavaScript; no compilation, bundling, or package managers required.
+- **Debugging**: Use browser developer tools; game runs at ~60 FPS with requestAnimationFrame.

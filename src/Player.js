@@ -1,6 +1,7 @@
-function Player() {
+function Player(playerType) {
   this._lives = 2;
   this._score = 0;
+  this._trackedTankType = playerType === undefined ? Tank.Type.PLAYER_1 : playerType;
   this.resetTanks();
 }
 
@@ -31,11 +32,14 @@ Player.prototype.notify = function (event) {
     this._score += event.points.getValue();
   }
   else if (event.name == Tank.Event.PLAYER_DESTROYED) {
-    if (this._lives == 0) {
-      this._eventManager.fireEvent({'name': Player.Event.OUT_OF_LIVES});
-    }
-    else {
-      this._lives--;
+    // Only handle destruction of tanks belonging to this player
+    if (event.tank && event.tank.getType() === this._trackedTankType) {
+      if (this._lives == 0) {
+        this._eventManager.fireEvent({'name': Player.Event.OUT_OF_LIVES});
+      }
+      else {
+        this._lives--;
+      }
     }
   }
   else if (event.name == PowerUpHandler.Event.TANK) {
